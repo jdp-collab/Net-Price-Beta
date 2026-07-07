@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UCD Cost of Attendance & Funding Planner</title>
-    <link rel="icon" type="image/png" href="favicon.png">
     <link rel="stylesheet" href="custom.css">
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans antialiased min-h-screen pb-12 overflow-hidden">
@@ -18,7 +17,7 @@
             <div class="p-6 space-y-4 text-sm leading-relaxed text-slate-700">
                 <p>This tool will provide general estimates of potential costs and financing options. It is accurate for students starting in September 2027 only and information is subject to change.</p>
 
-                <p>Federal financial aid programs require you to be a U.S. citizen, U.S. national (including natives of American Samoa or Swain's Island), or permanent resident of the U.S. Other students are not eligible for US federal financial aid programmes and should not use this tool.</p>
+                <p>US Federal financial aid programs require you to be a U.S. citizen, U.S. national (including natives of American Samoa or Swain's Island), or permanent resident of the U.S. Other students are not eligible for US federal financial aid programmes and should not reference US Federal Aid information, which is presented for informational purposes for eligible students only.</p>
 
                 <p>You are NOT applying for financial aid when you complete this Calculator. To apply for financial aid, you should file the Free Application for Federal Student Aid (FAFSA) and follow the instructions found on <a class="text-ucdSecondary underline font-medium" href="https://www.ucd.ie/global/study-at-ucd/scholarshipsfinances/northamericaloans/usfederalaid/" target="_blank" rel="noopener noreferrer">UCD's US Federal Aid page</a>.</p>
 
@@ -41,7 +40,7 @@
         <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             <div>
                 <h1 class="text-2xl md:text-3xl font-bold tracking-tight">University College Dublin</h1>
-                <p class="text-blue-100 mt-1">Student Cost &amp; Funding Planner (Non-EU Estimation Tool)</p>
+                <p class="text-blue-100 mt-1">Student Cost &amp; Funding Planner (Non-EU Full Time Students)</p>
             </div>
             <div id="schoolCodeBadge" class="hidden bg-[#02132e] px-4 py-2 rounded text-xs text-white border border-slate-800">
                 US Federal School Code: <strong>G10188</strong> | Academic Year: <span id="academicYearLabel">2027/2028</span>
@@ -55,7 +54,7 @@
             <div class="space-y-4 text-sm md:text-base leading-relaxed text-slate-700">
                 <p>This Calculator is designed for informational purposes for full degree undergraduate and graduate taught Non-EU Fee Eligible students. Cost and aid figures are estimates and are based on current fee and cost data, US Department of Education regulations, and recently available advice for students starting in September 2027.</p>
 
-                <p>If you have questions about studying at UCD, financing your studies, or next steps please reach out at <a class="text-ucdSecondary underline font-medium" href="https://www.ucd.ie/global/enquire/" target="_blank" rel="noopener noreferrer">https://www.ucd.ie/global/enquire/</a></p>
+                <p>If you have questions about the information provided in this calculator, studying at UCD, financing your studies, or next steps please reach out at <a class="text-ucdSecondary underline font-medium" href="https://www.ucd.ie/global/enquire/" target="_blank" rel="noopener noreferrer">https://www.ucd.ie/global/enquire/</a></p>
             </div>
         </div>
     </section>
@@ -95,16 +94,16 @@
                 <div id="dependencyGroup" class="federalAidOnly hidden">
                     <label for="dependencyStatus" class="block text-sm font-medium text-gray-700 mb-1">FAFSA Dependency Status</label>
                     <select id="dependencyStatus" class="w-full rounded-md border-gray-300 shadow-sm p-2.5 bg-gray-50 border focus:ring-2 focus:ring-ucdSecondary focus:bg-white outline-none" onchange="calculateFinancials()">
-                        <option value="dependent">Dependent Student (Relying on Parent Tax Info)</option>
-                        <option value="independent">Independent Student (Self-Supporting / Born before Jan 1, 2003)</option>
+                        <option value="dependent">Dependent Student</option>
+                        <option value="independent">Independent Student</option>
                     </select>
-                    <p class="text-xs text-gray-400 mt-1">Graduate students default entirely to Independent logic.</p>
+                    <p class="text-xs text-gray-400 mt-1">Refer to <a class="text-ucdSecondary underline font-medium" href="https://studentaid.gov/apply-for-aid/fafsa/filling-out/dependency" target="_blank" rel="noopener noreferrer">StudentAid.gov</a> for more information on dependency status.</p>
                 </div>
 
                 <div id="yearGroup">
                     <label for="undergradYear" class="block text-sm font-medium text-gray-700 mb-1">Year of Study</label>
                     <select id="undergradYear" class="w-full rounded-md border-gray-300 shadow-sm p-2.5 bg-gray-50 border focus:ring-2 focus:ring-ucdSecondary focus:bg-white outline-none" onchange="calculateFinancials()">
-                        <option value="1">1st Year (Freshman Baseline)</option>
+                        <option value="1">1st Year</option>
                         <option value="2">2nd Year (Sophomore)</option>
                         <option value="3">3rd Year or Higher (Junior / Senior Plus)</option>
                     </select>
@@ -117,13 +116,13 @@
                         <option value="professional">Professional program — Direct Unsubsidized up to $50,000/year</option>
                         <option value="legacyGradPlus">Legacy continuing Grad PLUS borrower — prior rules</option>
                     </select>
-                    <p class="text-xs text-gray-400 mt-1">Medicine and Veterinary Medicine default to Professional. UCD Financial Aid must confirm official program classification and any legacy eligibility.</p>
+                    <p class="text-xs text-gray-400 mt-1">Medicine and Veterinary Medicine default to Professional.</p>
                 </div>
 
                 <div id="parentPlusRuleGroup" class="federalAidOnly hidden pt-5 border-t border-gray-100">
                     <label for="parentPlusRule" class="block text-sm font-medium text-gray-700 mb-1">Parent PLUS Borrower Rule</label>
                     <select id="parentPlusRule" class="w-full rounded-md border-gray-300 shadow-sm p-2.5 bg-gray-50 border focus:ring-2 focus:ring-ucdSecondary focus:bg-white outline-none" onchange="calculateFinancials()">
-                        <option value="newParentPlus">New OBBBA rule — $20,000/year and $65,000 aggregate</option>
+                        <option value="newParentPlus">New OBBBA rule — $20,000/year and $65,000 aggregate per student</option>
                         <option value="legacyParentPlus">Legacy continuing Parent PLUS borrower — prior rules</option>
                     </select>
                     <p class="text-xs text-gray-400 mt-1">Shown only for dependent undergraduate students. Parent PLUS is not available for independent undergraduate students.</p>
@@ -166,7 +165,7 @@
                         <div>
                             <label for="ucdScholarshipEUR" class="block text-sm font-medium text-gray-700 mb-1">UCD Scholarships (€)</label>
                             <input id="ucdScholarshipEUR" type="number" inputmode="decimal" min="0" step="100" value="0" class="w-full rounded-md border-gray-300 shadow-sm p-2.5 bg-gray-50 border focus:ring-2 focus:ring-ucdSecondary focus:bg-white outline-none" oninput="calculateFinancials()" onchange="calculateFinancials()">
-                            <p class="text-xs text-gray-400 mt-1">Enter UCD awards in Euro. These reduce the estimated annual cost shown below.</p>
+                            <p class="text-xs text-gray-400 mt-1">Enter UCD awards in Euro. This will impact the estimated annual costs and potential eligibility for US Federal Loans.</p>
                         </div>
                         <div>
                             <label for="otherScholarshipUSD" class="block text-sm font-medium text-gray-700 mb-1">Other Scholarships / Funding ($)</label>
@@ -178,7 +177,7 @@
             </form>
 
             <div class="mt-8 pt-4 border-t border-gray-100 bg-blue-50/30 p-3 rounded-lg border border-blue-100/50 text-xs text-slate-700 leading-relaxed">
-                <strong>Anonymity Guard:</strong> Calculations run directly in your web browser via local static dependencies. No personal information is logged or transmitted.
+                <strong>Anonymity Guard:</strong> Calculations run directly in your web browser; no personal information is logged or transmitted.
             </div>
         </section>
 
@@ -362,8 +361,8 @@
                 </div>
 
                 <div class="bg-gray-100 p-4 rounded-lg border border-gray-200 text-xs text-gray-500 leading-relaxed space-y-2">
-                    <p><strong>Disclaimer Notice:</strong> This calculator offers financial estimates for general reference only. Official Cost of Attendance parameters are certified explicitly in Euros (€) inside the secure UCD student portal (SISweb) during processing.</p>
-                    <p class="federalAidOnly hidden"><strong>OBBBA Loan-Limit Note:</strong> The calculator uses post-July 1, 2026 planning limits for new borrowers by default. Legacy/transition options are included for estimate purposes only and must be confirmed by UCD Financial Aid.</p>
+                    <p><strong>Disclaimer Notice:</strong> This calculator offers financial estimates for general reference only. Official Cost of Attendance parameters are certified explicitly in Euros (€).</p>
+                    <p class="federalAidOnly hidden"><strong>OBBBA Loan-Limit Note:</strong> The calculator uses post-July 1, 2026 planning limits for new borrowers by default. Legacy/transition options are included for estimate purposes only and must be confirmed by UCD Federal Aid.</p>
                     <p class="federalAidOnly hidden">Actual dollar disbursements fluctuate over the calendar year based on ongoing market currency conversion adjustments. Pell Grants and other standard US federal grants are ineligible at international non-US institutions.</p>
                     <p id="livingSourceNote"></p>
                 </div>
