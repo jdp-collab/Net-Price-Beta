@@ -39,9 +39,12 @@
 
     <header class="bg-ucdPrimary text-white py-8 px-4 shadow-md mb-8">
         <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-            <div>
-                <h1 class="text-2xl md:text-3xl font-bold tracking-tight">University College Dublin</h1>
-                <p class="text-blue-100 mt-1">Student Cost &amp; Funding Planner (Non-EU Full Time Students)</p>
+            <div class="ucd-header-brand">
+                <img src="UCDlogo.png" alt="University College Dublin" class="ucd-header-logo">
+                <div>
+                    <h1 class="text-2xl md:text-3xl font-bold tracking-tight">Student Cost &amp; Funding Planner</h1>
+                    <p class="text-blue-100 mt-1">For Non-EU Full-Time Students</p>
+                </div>
             </div>
             <div id="schoolCodeBadge" class="hidden bg-[#02132e] px-4 py-2 rounded text-xs text-white border border-slate-800">
                 US Federal School Code: <strong>G10188</strong> | Academic Year: <span id="academicYearLabel">2027/2028</span>
@@ -63,118 +66,129 @@
     <main class="max-w-6xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-12 gap-8">
         
         <section class="lg:col-span-4 bg-white p-6 rounded-xl shadow-sm border border-gray-200 h-fit">
-            <h2 class="text-xl font-bold text-gray-900 mb-6 pb-2 border-b border-gray-100">1. Student Parameters</h2>
+            <h2 class="text-xl font-bold text-gray-900 mb-6 pb-2 border-b border-gray-100">Student Cost &amp; Funding Inputs</h2>
             
-            <form id="calcForm" class="space-y-5">
-                <div>
-                    <label for="citizenshipStatus" class="block text-sm font-medium text-gray-700 mb-1">Citizenship / Residency Status</label>
-                    <select id="citizenshipStatus" class="w-full rounded-md border-gray-300 shadow-sm p-2.5 bg-gray-50 border focus:ring-2 focus:ring-ucdSecondary focus:bg-white outline-none" onchange="handleCitizenshipChange()">
-                        <option value="">Select status...</option>
-                        <option value="usCitizen">US Citizen</option>
-                        <option value="usNational">US National</option>
-                        <option value="usPermanentResident">US Permanent Resident</option>
-                        <option value="other">Other</option>
-                    </select>
-                    <p class="text-xs text-gray-400 mt-1">This helps tailor which funding sections are shown.</p>
-                </div>
+            <form id="calcForm" class="space-y-6">
+                <fieldset class="space-y-5">
+                    <legend class="w-full text-sm font-bold text-ucdPrimary uppercase tracking-wider mb-3 pb-2 border-b border-gray-200">1. Academic Information</legend>
 
-                <div>
-                    <label for="academicLevel" class="block text-sm font-medium text-gray-700 mb-1">Academic Degree Level</label>
-                    <select id="academicLevel" class="w-full rounded-md border-gray-300 shadow-sm p-2.5 bg-gray-50 border focus:ring-2 focus:ring-ucdSecondary focus:bg-white outline-none" onchange="handleLevelChange()">
-                        <option value="undergraduate">Undergraduate Degree (Bachelors)</option>
-                        <option value="graduate">Graduate Taught Program (Masters)</option>
-                    </select>
-                </div>
+                    <div>
+                        <label for="academicLevel" class="block text-sm font-medium text-gray-700 mb-1">Academic Degree Level</label>
+                        <select id="academicLevel" class="w-full rounded-md border-gray-300 shadow-sm p-2.5 bg-gray-50 border focus:ring-2 focus:ring-ucdSecondary focus:bg-white outline-none" onchange="handleLevelChange()">
+                            <option value="undergraduate">Undergraduate Degree (Bachelors)</option>
+                            <option value="graduate">Graduate Taught Program (Masters)</option>
+                        </select>
+                    </div>
 
-                <div>
-                    <label for="fieldOfStudy" class="block text-sm font-medium text-gray-700 mb-1">Field of Study / College Track</label>
-                    <select id="fieldOfStudy" class="w-full rounded-md border-gray-300 shadow-sm p-2.5 bg-gray-50 border focus:ring-2 focus:ring-ucdSecondary focus:bg-white outline-none" onchange="handleFieldChange()">
-                    </select>
-                </div>
+                    <div>
+                        <label for="annualTuitionEUR" class="block text-sm font-medium text-gray-700 mb-1">Annual Tuition Fees for Your Course (€)</label>
+                        <input id="annualTuitionEUR" type="number" inputmode="decimal" min="0" step="100" placeholder="e.g. 25000" aria-describedby="tuitionFeeHelp" class="w-full rounded-md border-gray-300 shadow-sm p-2.5 bg-gray-50 border focus:ring-2 focus:ring-ucdSecondary focus:bg-white outline-none" oninput="calculateFinancials()" onchange="calculateFinancials()">
+                        <p id="tuitionFeeHelp" class="text-xs text-gray-400 mt-1">Find the relevant annual tuition fee for your course on <a class="text-ucdSecondary underline font-medium" href="https://www.ucd.ie/students/fees/noneucoursefees/" target="_blank" rel="noopener noreferrer">UCD's Non-EU Course Fees page</a>, then enter that amount above in euro (€).</p>
+                    </div>
 
-                <div id="dependencyGroup" class="federalAidOnly hidden">
-                    <label for="dependencyStatus" class="block text-sm font-medium text-gray-700 mb-1">FAFSA Dependency Status</label>
-                    <select id="dependencyStatus" class="w-full rounded-md border-gray-300 shadow-sm p-2.5 bg-gray-50 border focus:ring-2 focus:ring-ucdSecondary focus:bg-white outline-none" onchange="calculateFinancials()">
-                        <option value="dependent">Dependent Student</option>
-                        <option value="independent">Independent Student</option>
-                    </select>
-                    <p class="text-xs text-gray-400 mt-1">Refer to <a class="text-ucdSecondary underline font-medium" href="https://studentaid.gov/apply-for-aid/fafsa/filling-out/dependency" target="_blank" rel="noopener noreferrer">StudentAid.gov</a> for more information on dependency status.</p>
-                </div>
+                    <div id="yearGroup">
+                        <label for="undergradYear" class="block text-sm font-medium text-gray-700 mb-1">Year of Study</label>
+                        <select id="undergradYear" class="w-full rounded-md border-gray-300 shadow-sm p-2.5 bg-gray-50 border focus:ring-2 focus:ring-ucdSecondary focus:bg-white outline-none" onchange="calculateFinancials()">
+                            <option value="1">1st Year</option>
+                            <option value="2">2nd Year (Sophomore)</option>
+                            <option value="3">3rd Year or Higher (Junior / Senior Plus)</option>
+                        </select>
+                    </div>
+                </fieldset>
 
-                <div id="yearGroup">
-                    <label for="undergradYear" class="block text-sm font-medium text-gray-700 mb-1">Year of Study</label>
-                    <select id="undergradYear" class="w-full rounded-md border-gray-300 shadow-sm p-2.5 bg-gray-50 border focus:ring-2 focus:ring-ucdSecondary focus:bg-white outline-none" onchange="calculateFinancials()">
-                        <option value="1">1st Year</option>
-                        <option value="2">2nd Year (Sophomore)</option>
-                        <option value="3">3rd Year or Higher (Junior / Senior Plus)</option>
-                    </select>
-                </div>
+                <fieldset class="space-y-5 pt-5 border-t border-gray-100">
+                    <legend class="w-full text-sm font-bold text-ucdPrimary uppercase tracking-wider mb-3 pb-2 border-b border-gray-200">2. Student Information</legend>
 
-                <div id="graduateLoanCategoryGroup" class="federalAidOnly hidden pt-5 border-t border-gray-100">
-                    <label for="graduateLoanCategory" class="block text-sm font-medium text-gray-700 mb-1">Graduate Federal Loan Category</label>
-                    <select id="graduateLoanCategory" class="w-full rounded-md border-gray-300 shadow-sm p-2.5 bg-gray-50 border focus:ring-2 focus:ring-ucdSecondary focus:bg-white outline-none" onchange="calculateFinancials()">
-                        <option value="standardGraduate">Graduate program — Direct Unsubsidized up to $20,500/year</option>
-                        <option value="professional">Professional program — Direct Unsubsidized up to $50,000/year</option>
-                        <option value="legacyGradPlus">Legacy continuing Grad PLUS borrower — prior rules</option>
-                    </select>
-                    <p class="text-xs text-gray-400 mt-1">Medicine and Veterinary Medicine default to Professional.</p>
-                </div>
+                    <div>
+                        <label for="citizenshipStatus" class="block text-sm font-medium text-gray-700 mb-1">Citizenship / Residency Status</label>
+                        <select id="citizenshipStatus" class="w-full rounded-md border-gray-300 shadow-sm p-2.5 bg-gray-50 border focus:ring-2 focus:ring-ucdSecondary focus:bg-white outline-none" onchange="handleCitizenshipChange()">
+                            <option value="">Select status...</option>
+                            <option value="usCitizen">US Citizen</option>
+                            <option value="usNational">US National</option>
+                            <option value="usPermanentResident">US Permanent Resident</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <p class="text-xs text-gray-400 mt-1">This helps tailor which funding sections are shown.</p>
+                    </div>
 
-                <div id="parentPlusRuleGroup" class="federalAidOnly hidden pt-5 border-t border-gray-100">
-                    <label for="parentPlusRule" class="block text-sm font-medium text-gray-700 mb-1">Parent PLUS Borrower Rule</label>
-                    <select id="parentPlusRule" class="w-full rounded-md border-gray-300 shadow-sm p-2.5 bg-gray-50 border focus:ring-2 focus:ring-ucdSecondary focus:bg-white outline-none" onchange="calculateFinancials()">
-                        <option value="newParentPlus">New OBBBA rule — $20,000/year and $65,000 aggregate per student</option>
-                        <option value="legacyParentPlus">Legacy continuing Parent PLUS borrower — prior rules</option>
-                    </select>
-                    <p class="text-xs text-gray-400 mt-1">Shown only for dependent undergraduate students. Parent PLUS is not available for independent undergraduate students.</p>
-                </div>
+                    <div id="dependencyGroup" class="federalAidOnly hidden">
+                        <label for="dependencyStatus" class="block text-sm font-medium text-gray-700 mb-1">FAFSA Dependency Status</label>
+                        <select id="dependencyStatus" class="w-full rounded-md border-gray-300 shadow-sm p-2.5 bg-gray-50 border focus:ring-2 focus:ring-ucdSecondary focus:bg-white outline-none" onchange="calculateFinancials()">
+                            <option value="dependent">Dependent Student</option>
+                            <option value="independent">Independent Student</option>
+                        </select>
+                        <p class="text-xs text-gray-400 mt-1">Refer to <a class="text-ucdSecondary underline font-medium" href="https://studentaid.gov/apply-for-aid/fafsa/filling-out/dependency" target="_blank" rel="noopener noreferrer">StudentAid.gov</a> for more information on dependency status.</p>
+                    </div>
+                </fieldset>
 
-                <div id="priorFederalBorrowingGroup" class="federalAidOnly hidden pt-5 border-t border-gray-100">
-                    <h3 class="text-sm font-bold text-gray-900 uppercase tracking-wider mb-3">Prior Federal Borrowing</h3>
-                    <div class="space-y-4">
-                        <div>
-                            <label for="priorStudentLoansUSD" class="block text-sm font-medium text-gray-700 mb-1">Prior Federal Student Loans ($)</label>
-                            <input id="priorStudentLoansUSD" type="number" inputmode="decimal" min="0" step="500" value="0" class="w-full rounded-md border-gray-300 shadow-sm p-2.5 bg-gray-50 border focus:ring-2 focus:ring-ucdSecondary focus:bg-white outline-none" oninput="calculateFinancials()" onchange="calculateFinancials()">
-                            <p class="text-xs text-gray-400 mt-1">Optional. Exclude Parent PLUS. Used against the new $257,500 lifetime federal student-loan cap.</p>
-                        </div>
-                        <div id="priorGradProfBorrowingGroup" class="hidden">
-                            <label for="priorGradProfLoansUSD" class="block text-sm font-medium text-gray-700 mb-1">Prior Graduate/Professional Federal Loans ($)</label>
-                            <input id="priorGradProfLoansUSD" type="number" inputmode="decimal" min="0" step="500" value="0" class="w-full rounded-md border-gray-300 shadow-sm p-2.5 bg-gray-50 border focus:ring-2 focus:ring-ucdSecondary focus:bg-white outline-none" oninput="calculateFinancials()" onchange="calculateFinancials()">
-                            <p class="text-xs text-gray-400 mt-1">Optional. Used against the $100,000 graduate or $200,000 professional aggregate cap.</p>
-                        </div>
-                        <div id="priorParentPlusBorrowingGroup" class="hidden">
-                            <label for="priorParentPlusUSD" class="block text-sm font-medium text-gray-700 mb-1">Prior Parent PLUS for This Student ($)</label>
-                            <input id="priorParentPlusUSD" type="number" inputmode="decimal" min="0" step="500" value="0" class="w-full rounded-md border-gray-300 shadow-sm p-2.5 bg-gray-50 border focus:ring-2 focus:ring-ucdSecondary focus:bg-white outline-none" oninput="calculateFinancials()" onchange="calculateFinancials()">
-                            <p class="text-xs text-gray-400 mt-1">Optional. Used against the new $65,000 Parent PLUS aggregate limit per dependent student.</p>
+                <fieldset class="space-y-5 pt-5 border-t border-gray-100">
+                    <legend class="w-full text-sm font-bold text-ucdPrimary uppercase tracking-wider mb-3 pb-2 border-b border-gray-200">3. Prior Federal Borrowing</legend>
+
+                    <div id="parentPlusRuleGroup" class="federalAidOnly hidden">
+                        <label for="parentPlusRule" class="block text-sm font-medium text-gray-700 mb-1">Parent PLUS Borrower Rule</label>
+                        <select id="parentPlusRule" class="w-full rounded-md border-gray-300 shadow-sm p-2.5 bg-gray-50 border focus:ring-2 focus:ring-ucdSecondary focus:bg-white outline-none" onchange="updateLoanInputVisibility(); calculateFinancials();">
+                            <option value="newParentPlus">New OBBBA rule — $20,000/year and $65,000 aggregate per student</option>
+                            <option value="legacyParentPlus">Legacy continuing Parent PLUS borrower — prior rules</option>
+                        </select>
+                        <p class="text-xs text-gray-400 mt-1">Shown only for dependent undergraduate students. Parent PLUS is not available for independent undergraduate students.</p>
+                    </div>
+
+                    <div id="graduateLoanCategoryGroup" class="federalAidOnly hidden">
+                        <label for="graduateLoanCategory" class="block text-sm font-medium text-gray-700 mb-1">Graduate Federal Loan Category</label>
+                        <select id="graduateLoanCategory" class="w-full rounded-md border-gray-300 shadow-sm p-2.5 bg-gray-50 border focus:ring-2 focus:ring-ucdSecondary focus:bg-white outline-none" onchange="updateLoanInputVisibility(); calculateFinancials();">
+                            <option value="standardGraduate">Graduate program — Direct Unsubsidized up to $20,500/year</option>
+                            <option value="professional">Professional program — Direct Unsubsidized up to $50,000/year</option>
+                            <option value="legacyGradPlus">Legacy continuing Grad PLUS borrower — prior rules</option>
+                        </select>
+                        <p class="text-xs text-gray-400 mt-1">Select Professional only if UCD confirms that your programme is treated as a professional programme for federal loan purposes.</p>
+                    </div>
+
+                    <div id="priorFederalBorrowingGroup" class="federalAidOnly hidden">
+                        <div class="space-y-4">
+                            <div>
+                                <label for="priorStudentLoansUSD" class="block text-sm font-medium text-gray-700 mb-1">Prior Federal Student Loans ($)</label>
+                                <input id="priorStudentLoansUSD" type="number" inputmode="decimal" min="0" step="500" value="0" class="w-full rounded-md border-gray-300 shadow-sm p-2.5 bg-gray-50 border focus:ring-2 focus:ring-ucdSecondary focus:bg-white outline-none" oninput="calculateFinancials()" onchange="calculateFinancials()">
+                                <p class="text-xs text-gray-400 mt-1">Optional. Exclude Parent PLUS. Used against the new $257,500 lifetime federal student-loan cap.</p>
+                            </div>
+                            <div id="priorGradProfBorrowingGroup" class="hidden">
+                                <label for="priorGradProfLoansUSD" class="block text-sm font-medium text-gray-700 mb-1">Prior Graduate/Professional Federal Loans ($)</label>
+                                <input id="priorGradProfLoansUSD" type="number" inputmode="decimal" min="0" step="500" value="0" class="w-full rounded-md border-gray-300 shadow-sm p-2.5 bg-gray-50 border focus:ring-2 focus:ring-ucdSecondary focus:bg-white outline-none" oninput="calculateFinancials()" onchange="calculateFinancials()">
+                                <p class="text-xs text-gray-400 mt-1">Optional. Used against the $100,000 graduate or $200,000 professional aggregate cap.</p>
+                            </div>
+                            <div id="priorParentPlusBorrowingGroup" class="hidden">
+                                <label for="priorParentPlusUSD" class="block text-sm font-medium text-gray-700 mb-1">Prior Parent PLUS for This Student ($)</label>
+                                <input id="priorParentPlusUSD" type="number" inputmode="decimal" min="0" step="500" value="0" class="w-full rounded-md border-gray-300 shadow-sm p-2.5 bg-gray-50 border focus:ring-2 focus:ring-ucdSecondary focus:bg-white outline-none" oninput="calculateFinancials()" onchange="calculateFinancials()">
+                                <p class="text-xs text-gray-400 mt-1">Optional. Used against the new $65,000 Parent PLUS aggregate limit per dependent student.</p>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div>
-                    <label for="costScenario" class="block text-sm font-medium text-gray-700 mb-1">Cost Scenario Used for Estimate</label>
-                    <select id="costScenario" class="w-full rounded-md border-gray-300 shadow-sm p-2.5 bg-gray-50 border focus:ring-2 focus:ring-ucdSecondary focus:bg-white outline-none" onchange="calculateFinancials()">
-                        <option value="lowest">Lowest</option>
-                        <option value="median" selected>Median</option>
-                        <option value="high">High</option>
-                    </select>
-                    <p id="scenarioHelper" class="text-xs text-gray-400 mt-1">All three cost ranges display below; this selection controls the annual cost summary.</p>
-                </div>
-
-                <div class="pt-5 border-t border-gray-100">
-                    <h3 class="text-sm font-bold text-gray-900 uppercase tracking-wider mb-3">Scholarships &amp; Funding</h3>
-                    <div class="space-y-4">
-                        <div>
-                            <label for="ucdScholarshipEUR" class="block text-sm font-medium text-gray-700 mb-1">UCD Scholarships (€)</label>
-                            <input id="ucdScholarshipEUR" type="number" inputmode="decimal" min="0" step="100" value="0" class="w-full rounded-md border-gray-300 shadow-sm p-2.5 bg-gray-50 border focus:ring-2 focus:ring-ucdSecondary focus:bg-white outline-none" oninput="calculateFinancials()" onchange="calculateFinancials()">
-                            <p class="text-xs text-gray-400 mt-1">Enter UCD awards in Euro. This will impact the estimated annual costs and potential eligibility for US Federal Loans.</p>
-                        </div>
-                        <div>
-                            <label for="otherScholarshipUSD" class="block text-sm font-medium text-gray-700 mb-1">Other Scholarships / Funding ($)</label>
-                            <input id="otherScholarshipUSD" type="number" inputmode="decimal" min="0" step="100" value="0" class="w-full rounded-md border-gray-300 shadow-sm p-2.5 bg-gray-50 border focus:ring-2 focus:ring-ucdSecondary focus:bg-white outline-none" oninput="calculateFinancials()" onchange="calculateFinancials()">
-                            <p class="text-xs text-gray-400 mt-1">Enter outside scholarships, private funding, or other aid in US Dollars.</p>
-                        </div>
+                    <div>
+                        <label for="costScenario" class="block text-sm font-medium text-gray-700 mb-1">Cost Scenario Used for Estimate</label>
+                        <select id="costScenario" class="w-full rounded-md border-gray-300 shadow-sm p-2.5 bg-gray-50 border focus:ring-2 focus:ring-ucdSecondary focus:bg-white outline-none" onchange="calculateFinancials()">
+                            <option value="lowest">Lowest</option>
+                            <option value="median" selected>Median</option>
+                            <option value="high">High</option>
+                        </select>
+                        <p id="scenarioHelper" class="text-xs text-gray-400 mt-1">All three cost ranges display below; this selection controls the annual cost summary.</p>
                     </div>
-                </div>
+                </fieldset>
+
+                <fieldset class="space-y-5 pt-5 border-t border-gray-100">
+                    <legend class="w-full text-sm font-bold text-ucdPrimary uppercase tracking-wider mb-3 pb-2 border-b border-gray-200">4. Scholarships &amp; Funding</legend>
+
+                    <div>
+                        <label for="ucdScholarshipEUR" class="block text-sm font-medium text-gray-700 mb-1">UCD Scholarships (€)</label>
+                        <input id="ucdScholarshipEUR" type="number" inputmode="decimal" min="0" step="100" value="0" class="w-full rounded-md border-gray-300 shadow-sm p-2.5 bg-gray-50 border focus:ring-2 focus:ring-ucdSecondary focus:bg-white outline-none" oninput="calculateFinancials()" onchange="calculateFinancials()">
+                        <p class="text-xs text-gray-400 mt-1">Enter UCD awards in Euro. This will impact the estimated annual costs and potential eligibility for US Federal Loans.</p>
+                    </div>
+
+                    <div>
+                        <label for="otherScholarshipUSD" class="block text-sm font-medium text-gray-700 mb-1">Other Scholarships / Funding ($)</label>
+                        <input id="otherScholarshipUSD" type="number" inputmode="decimal" min="0" step="100" value="0" class="w-full rounded-md border-gray-300 shadow-sm p-2.5 bg-gray-50 border focus:ring-2 focus:ring-ucdSecondary focus:bg-white outline-none" oninput="calculateFinancials()" onchange="calculateFinancials()">
+                        <p class="text-xs text-gray-400 mt-1">Enter outside scholarships, private funding, or other aid in US Dollars.</p>
+                    </div>
+                </fieldset>
             </form>
 
             <div class="mt-8 pt-4 border-t border-gray-100 bg-blue-50/30 p-3 rounded-lg border border-blue-100/50 text-xs text-slate-700 leading-relaxed">
@@ -202,6 +216,10 @@
                             <p class="text-xs text-gray-400 mt-1" id="costRangeContext">Includes tuition, monthly living costs, one-time costs, and scholarship/funding offsets.</p>
                         </div>
                         <p class="text-xs text-gray-500" id="fxRateLabel"></p>
+                    </div>
+
+                    <div id="tuitionFeeWarning" class="mb-5 rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900" role="status" aria-live="polite">
+                        <strong>⚠️ Until you enter your estimated annual tuition fees the costs displayed will only reflect estimated living costs</strong>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -455,21 +473,9 @@
             }
 
             const level = document.getElementById("academicLevel").value;
-            const studySelect = document.getElementById("fieldOfStudy");
             const yearGroup = document.getElementById("yearGroup");
             const dependencySelect = document.getElementById("dependencyStatus");
             const graduateLoanCategoryGroup = document.getElementById("graduateLoanCategoryGroup");
-
-            studySelect.innerHTML = "";
-            studySelect.value = "";
-            const tracks = Object.keys(UCD_FINANCIAL_DATABASE.tuitionRatesEUR[level]);
-            
-            tracks.forEach(track => {
-                let opt = document.createElement("option");
-                opt.value = track;
-                opt.innerText = track;
-                studySelect.appendChild(opt);
-            });
 
             if (level === "graduate") {
                 yearGroup.classList.add("hidden");
@@ -477,7 +483,6 @@
                 dependencySelect.disabled = true;
                 dependencySelect.classList.add("bg-gray-200", "cursor-not-allowed");
                 graduateLoanCategoryGroup.classList.remove("hidden");
-                setDefaultGraduateLoanCategory();
             } else {
                 yearGroup.classList.remove("hidden");
                 dependencySelect.disabled = false;
@@ -487,21 +492,6 @@
 
             updateLoanInputVisibility();
             calculateFinancials();
-        }
-
-        function handleFieldChange() {
-            if (document.getElementById("academicLevel").value === "graduate") {
-                setDefaultGraduateLoanCategory();
-            }
-            updateLoanInputVisibility();
-            calculateFinancials();
-        }
-
-        function setDefaultGraduateLoanCategory() {
-            const field = document.getElementById("fieldOfStudy").value || "";
-            const keywords = UCD_FINANCIAL_DATABASE.federalLoanRules?.graduate?.defaultProfessionalKeywords || [];
-            const isProfessionalDefault = keywords.some(keyword => field.toLowerCase().includes(keyword));
-            document.getElementById("graduateLoanCategory").value = isProfessionalDefault ? "professional" : "standardGraduate";
         }
 
         function updateLoanInputVisibility() {
@@ -524,17 +514,18 @@
 
         function calculateFinancials() {
             const level = document.getElementById("academicLevel").value;
-            const field = document.getElementById("fieldOfStudy").value;
+            const tuitionEUR = parseNonNegativeNumber(document.getElementById("annualTuitionEUR")?.value);
             const dependency = document.getElementById("dependencyStatus").value;
             const year = parseInt(document.getElementById("undergradYear").value, 10);
             const selectedScenario = document.getElementById("costScenario").value;
             const eligibleForFederalAid = isFederalAidEligibleStatus();
 
+            const tuitionFeeWarning = document.getElementById("tuitionFeeWarning");
+            tuitionFeeWarning?.classList.toggle("hidden", tuitionEUR > 0);
+
             updateFederalAidVisibility();
             updateLoanInputVisibility();
 
-            const alertBox = document.getElementById("complianceAlert");
-            const dashboard = document.getElementById("dashboardResults");
             const fxRate = UCD_FINANCIAL_DATABASE.metadata.institutionalExchangeRate;
             const funding = getFundingInputs(fxRate);
             const loanInputs = getLoanInputs();
@@ -545,22 +536,12 @@
                 ? `Living costs shown as Lowest / Median / High; monthly living-cost totals last updated ${UCD_FINANCIAL_DATABASE.metadata.livingCostsLastUpdated}. Federal loan limits reflect OBBBA planning rules last updated ${UCD_FINANCIAL_DATABASE.metadata.federalLoanRulesLastUpdated}.`
                 : `Living costs shown as Lowest / Median / High; monthly living-cost totals last updated ${UCD_FINANCIAL_DATABASE.metadata.livingCostsLastUpdated}.`;
 
-            const lowerField = field.toLowerCase();
-            const containsExcludedKeyword = UCD_FINANCIAL_DATABASE.complianceExclusions.ineligibleKeywords.some(keyword => lowerField.includes(keyword));
-
-            if (eligibleForFederalAid && containsExcludedKeyword) {
-                document.getElementById("complianceText").innerText = UCD_FINANCIAL_DATABASE.complianceExclusions.warningMessage;
-                alertBox.classList.remove("hidden");
-                dashboard.classList.add("hidden");
-                return;
-            } else {
-                alertBox.classList.add("hidden");
-                dashboard.classList.remove("hidden");
-            }
+            document.getElementById("complianceAlert")?.classList.add("hidden");
+            document.getElementById("dashboardResults")?.classList.remove("hidden");
 
             const scenarioTotals = {};
             SCENARIOS.forEach(scenario => {
-                scenarioTotals[scenario] = calculateScenarioTotals(level, field, scenario, funding, fxRate);
+                scenarioTotals[scenario] = calculateScenarioTotals(level, tuitionEUR, scenario, funding, fxRate);
             });
 
             updateScenarioCards(scenarioTotals, selectedScenario, fxRate, funding);
@@ -575,8 +556,7 @@
             }
         }
 
-        function calculateScenarioTotals(level, field, scenario, funding, fxRate) {
-            const tuitionEUR = UCD_FINANCIAL_DATABASE.tuitionRatesEUR[level][field];
+        function calculateScenarioTotals(level, tuitionEUR, scenario, funding, fxRate) {
             const colMonths = UCD_FINANCIAL_DATABASE.costOfLivingEUR.durationMonths[level];
             const monthlyLivingEUR = getMonthlyLivingTotal(scenario);
             const annualLivingEUR = monthlyLivingEUR * colMonths;
@@ -673,7 +653,7 @@
             const rows = [
                 {
                     label: "Non-EU Tuition Fees",
-                    helper: "Determined by chosen college track",
+                    helper: "Annual course fee entered by the user from UCD's published Non-EU course fee schedule",
                     values: SCENARIOS.map(scenario => scenarioTotals[scenario].tuitionEUR)
                 },
                 {
