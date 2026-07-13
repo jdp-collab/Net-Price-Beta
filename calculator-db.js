@@ -136,47 +136,32 @@ const UCD_FINANCIAL_DATABASE = {
     },
 
 
-    // Federal loan limits reflecting One Big Beautiful Bill Act changes effective July 1, 2026.
-    // These are planning defaults only; UCD Financial Aid must confirm official eligibility,
-    // program classification, aggregate usage, and any legacy/transition eligibility.
+    // Annual federal loan limits used for first-year, first-time borrower estimates.
+    // The calculator intentionally does not calculate individual aggregate or lifetime limits.
+    // UCD must confirm official eligibility after receiving the student's FAFSA information.
     federalLoanRules: {
         effectiveDate: "July 1, 2026",
-        lifetimeStudentLoanLimitUSD: 257500, // Excludes Parent PLUS loans
         undergraduate: {
             dependent: {
                 annualByYear: {
-                    1: { subsidized: 3500, unsubsidized: 2000 },
-                    2: { subsidized: 4500, unsubsidized: 2000 },
-                    3: { subsidized: 5500, unsubsidized: 2000 }
+                    1: { subsidized: 3500, unsubsidized: 2000 }
                 }
             },
             independent: {
                 annualByYear: {
-                    1: { subsidized: 3500, unsubsidized: 6000 },
-                    2: { subsidized: 4500, unsubsidized: 6000 },
-                    3: { subsidized: 5500, unsubsidized: 7000 }
+                    1: { subsidized: 3500, unsubsidized: 6000 }
                 }
             },
             parentPlus: {
-                annualLimitUSD: 20000,
-                aggregateLimitPerStudentUSD: 65000,
-                legacyNote: "Continuing borrowers who meet the transition rules may be able to borrow under pre-OBBBA Parent PLUS rules for up to three academic years or until completion of the credential, whichever is shorter."
+                annualLimitUSD: 20000
             }
         },
         graduate: {
             standardGraduate: {
                 annualUnsubsidizedLimitUSD: 20500,
-                aggregateLimitUSD: 100000,
                 label: "Graduate program"
             },
-            professional: {
-                annualUnsubsidizedLimitUSD: 50000,
-                aggregateLimitUSD: 200000,
-                label: "Professional program"
-            },
-            gradPlusNewBorrowerAvailable: false,
-            legacyNote: "Graduate PLUS is eliminated for new borrowers beginning July 1, 2026. Continuing borrowers who meet the transition rules may be able to borrow Grad PLUS under prior rules for up to three academic years or until completion of the credential, whichever is shorter.",
-            defaultProfessionalKeywords: ["medicine", "veterinary"]
+            gradPlusNewBorrowerAvailable: false
         }
     },
 

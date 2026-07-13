@@ -89,10 +89,9 @@
                     <div id="yearGroup">
                         <label for="undergradYear" class="block text-sm font-medium text-gray-700 mb-1">Year of Study</label>
                         <select id="undergradYear" class="w-full rounded-md border-gray-300 shadow-sm p-2.5 bg-gray-50 border focus:ring-2 focus:ring-ucdSecondary focus:bg-white outline-none" onchange="calculateFinancials()">
-                            <option value="1">1st Year</option>
-                            <option value="2">2nd Year (Sophomore)</option>
-                            <option value="3">3rd Year or Higher (Junior / Senior Plus)</option>
+                            <option value="1">First Year, First Time Borrower</option>
                         </select>
+                        <p class="text-xs text-gray-400 mt-1">Federal loan estimates assume the applicant is beginning a new programme and borrowing under the rules effective from July 1, 2026.</p>
                     </div>
                 </fieldset>
 
@@ -122,60 +121,7 @@
                 </fieldset>
 
                 <fieldset class="space-y-5 pt-5 border-t border-gray-100">
-                    <legend class="w-full text-sm font-bold text-ucdPrimary uppercase tracking-wider mb-3 pb-2 border-b border-gray-200">3. Prior Federal Borrowing</legend>
-
-                    <div id="parentPlusRuleGroup" class="federalAidOnly hidden">
-                        <label for="parentPlusRule" class="block text-sm font-medium text-gray-700 mb-1">Parent PLUS Borrower Rule</label>
-                        <select id="parentPlusRule" class="w-full rounded-md border-gray-300 shadow-sm p-2.5 bg-gray-50 border focus:ring-2 focus:ring-ucdSecondary focus:bg-white outline-none" onchange="updateLoanInputVisibility(); calculateFinancials();">
-                            <option value="newParentPlus">New OBBBA rule — $20,000/year and $65,000 aggregate per student</option>
-                            <option value="legacyParentPlus">Legacy continuing Parent PLUS borrower — prior rules</option>
-                        </select>
-                        <p class="text-xs text-gray-400 mt-1">Shown only for dependent undergraduate students. Parent PLUS is not available for independent undergraduate students.</p>
-                    </div>
-
-                    <div id="graduateLoanCategoryGroup" class="federalAidOnly hidden">
-                        <label for="graduateLoanCategory" class="block text-sm font-medium text-gray-700 mb-1">Graduate Federal Loan Category</label>
-                        <select id="graduateLoanCategory" class="w-full rounded-md border-gray-300 shadow-sm p-2.5 bg-gray-50 border focus:ring-2 focus:ring-ucdSecondary focus:bg-white outline-none" onchange="updateLoanInputVisibility(); calculateFinancials();">
-                            <option value="standardGraduate">Graduate program — Direct Unsubsidized up to $20,500/year</option>
-                            <option value="professional">Professional program — Direct Unsubsidized up to $50,000/year</option>
-                            <option value="legacyGradPlus">Legacy continuing Grad PLUS borrower — prior rules</option>
-                        </select>
-                        <p class="text-xs text-gray-400 mt-1">Select Professional only if UCD confirms that your programme is treated as a professional programme for federal loan purposes.</p>
-                    </div>
-
-                    <div id="priorFederalBorrowingGroup" class="federalAidOnly hidden">
-                        <div class="space-y-4">
-                            <div>
-                                <label for="priorStudentLoansUSD" class="block text-sm font-medium text-gray-700 mb-1">Prior Federal Student Loans ($)</label>
-                                <input id="priorStudentLoansUSD" type="number" inputmode="decimal" min="0" step="500" value="0" class="w-full rounded-md border-gray-300 shadow-sm p-2.5 bg-gray-50 border focus:ring-2 focus:ring-ucdSecondary focus:bg-white outline-none" oninput="calculateFinancials()" onchange="calculateFinancials()">
-                                <p class="text-xs text-gray-400 mt-1">Optional. Exclude Parent PLUS. Used against the new $257,500 lifetime federal student-loan cap.</p>
-                            </div>
-                            <div id="priorGradProfBorrowingGroup" class="hidden">
-                                <label for="priorGradProfLoansUSD" class="block text-sm font-medium text-gray-700 mb-1">Prior Graduate/Professional Federal Loans ($)</label>
-                                <input id="priorGradProfLoansUSD" type="number" inputmode="decimal" min="0" step="500" value="0" class="w-full rounded-md border-gray-300 shadow-sm p-2.5 bg-gray-50 border focus:ring-2 focus:ring-ucdSecondary focus:bg-white outline-none" oninput="calculateFinancials()" onchange="calculateFinancials()">
-                                <p class="text-xs text-gray-400 mt-1">Optional. Used against the $100,000 graduate or $200,000 professional aggregate cap.</p>
-                            </div>
-                            <div id="priorParentPlusBorrowingGroup" class="hidden">
-                                <label for="priorParentPlusUSD" class="block text-sm font-medium text-gray-700 mb-1">Prior Parent PLUS for This Student ($)</label>
-                                <input id="priorParentPlusUSD" type="number" inputmode="decimal" min="0" step="500" value="0" class="w-full rounded-md border-gray-300 shadow-sm p-2.5 bg-gray-50 border focus:ring-2 focus:ring-ucdSecondary focus:bg-white outline-none" oninput="calculateFinancials()" onchange="calculateFinancials()">
-                                <p class="text-xs text-gray-400 mt-1">Optional. Used against the new $65,000 Parent PLUS aggregate limit per dependent student.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div>
-                        <label for="costScenario" class="block text-sm font-medium text-gray-700 mb-1">Cost Scenario Used for Estimate</label>
-                        <select id="costScenario" class="w-full rounded-md border-gray-300 shadow-sm p-2.5 bg-gray-50 border focus:ring-2 focus:ring-ucdSecondary focus:bg-white outline-none" onchange="calculateFinancials()">
-                            <option value="lowest">Lowest</option>
-                            <option value="median" selected>Median</option>
-                            <option value="high">High</option>
-                        </select>
-                        <p id="scenarioHelper" class="text-xs text-gray-400 mt-1">All three cost ranges display below; this selection controls the annual cost summary.</p>
-                    </div>
-                </fieldset>
-
-                <fieldset class="space-y-5 pt-5 border-t border-gray-100">
-                    <legend class="w-full text-sm font-bold text-ucdPrimary uppercase tracking-wider mb-3 pb-2 border-b border-gray-200">4. Scholarships &amp; Funding</legend>
+                    <legend class="w-full text-sm font-bold text-ucdPrimary uppercase tracking-wider mb-3 pb-2 border-b border-gray-200">3. Scholarships &amp; Funding</legend>
 
                     <div>
                         <label for="ucdScholarshipEUR" class="block text-sm font-medium text-gray-700 mb-1">UCD Scholarships (€)</label>
@@ -249,10 +195,11 @@
                 <div id="federalAidSummaryCard" class="federalAidOnly hidden bg-white p-6 rounded-xl shadow-sm border border-gray-200">
                     <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
                         <div>
-                            <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Estimated Federal Loan Eligibility</h3>
+                            <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Potential Federal Loan Eligibility (Estimate)</h3>
                             <div class="text-3xl font-extrabold text-ucdSecondary mt-2" id="totalAidUSD">$0</div>
-                            <p class="text-xs text-gray-500 mt-1" id="aidScenarioLabel">Based on Median scenario.</p>
-                            <p class="text-xs text-slate-600 mt-2" id="loanRuleSummary">OBBBA loan limits effective July 1, 2026.</p>
+                            <p class="text-xs text-gray-500 mt-1" id="aidScenarioLabel">Based on median estimated costs after scholarships and other funding.</p>
+                            <p class="text-xs text-slate-600 mt-2" id="loanRuleSummary">Uses annual federal loan limits for first-year, first-time borrowers under rules effective July 1, 2026.</p>
+                            <p class="mt-3 rounded-lg border border-blue-100 bg-blue-50/50 p-3 text-xs leading-relaxed text-slate-700" id="officialEligibilityNotice"><strong>Estimate only:</strong> Specific federal loan eligibility depends on FAFSA information, programme and enrollment eligibility, dependency status, other financial assistance, applicable federal requirements, and UCD review. Confirmed eligibility will be communicated in the official Cost of Attendance document generated by UCD after receipt of the student's FAFSA information.</p>
                         </div>
                         <div class="rounded-lg bg-gray-50 border border-gray-200 px-4 py-3 text-sm min-w-[260px]">
                             <div class="flex justify-between gap-4"><span class="text-gray-500">Gross COA:</span> <strong id="selectedGrossCoaUSD">$0</strong></div>
@@ -341,7 +288,7 @@
 
                     <div id="federalLoanBlueprintCard" class="federalAidOnly hidden bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
                         <div class="bg-ucdPrimary text-white px-6 py-4">
-                            <h3 class="font-bold">US Federal Loan Allocation Blueprint</h3>
+                            <h3 class="font-bold">Potential US Federal Loan Breakdown</h3>
                         </div>
                         <div class="p-6 space-y-4">
                             <div class="bg-gray-50 p-4 rounded-lg flex justify-between items-center gap-4">
@@ -371,7 +318,7 @@
                             <div id="loanGapCard" class="bg-amber-50 border border-amber-200 p-4 rounded-lg flex justify-between items-center gap-4 hidden">
                                 <div>
                                     <h4 class="font-bold text-amber-900">Estimated Remaining Gap</h4>
-                                    <p class="text-xs text-amber-800">Net COA not covered by the displayed federal loan estimate.</p>
+                                    <p class="text-xs text-amber-800">Median estimated net cost not covered by this potential annual federal loan estimate.</p>
                                 </div>
                                 <div class="text-right font-bold text-lg text-amber-900" id="aidGap">$0</div>
                             </div>
@@ -381,7 +328,7 @@
 
                 <div class="bg-gray-100 p-4 rounded-lg border border-gray-200 text-xs text-gray-500 leading-relaxed space-y-2">
                     <p><strong>Disclaimer Notice:</strong> This calculator offers financial estimates for general reference only. Official Cost of Attendance parameters are certified explicitly in Euros (€).</p>
-                    <p class="federalAidOnly hidden"><strong>OBBBA Loan-Limit Note:</strong> The calculator uses post-July 1, 2026 planning limits for new borrowers by default. Legacy/transition options are included for estimate purposes only and must be confirmed by UCD Federal Aid.</p>
+                    <p class="federalAidOnly hidden"><strong>Federal Loan Estimate Note:</strong> The calculator assumes a first-year, first-time borrower subject to the federal loan rules effective July 1, 2026. It does not calculate individual aggregate or lifetime borrowing limits. Actual eligibility will be determined after UCD receives the student's FAFSA information and will be communicated in UCD's official Cost of Attendance document.</p>
                     <p class="federalAidOnly hidden">Actual dollar disbursements fluctuate over the calendar year based on ongoing market currency conversion adjustments. Pell Grants and other standard US federal grants are ineligible at international non-US institutions.</p>
                     <p id="livingSourceNote"></p>
                 </div>
@@ -394,11 +341,7 @@
 
     <script>
         const SCENARIOS = ["lowest", "median", "high"];
-        const SCENARIO_LABELS = {
-            lowest: "Lowest",
-            median: "Median",
-            high: "High"
-        };
+        const PLANNING_SCENARIO = "median";
 
 
         function acknowledgeIntroModal() {
@@ -431,7 +374,6 @@
 
         function handleCitizenshipChange() {
             updateFederalAidVisibility();
-            updateLoanInputVisibility();
             calculateFinancials();
         }
 
@@ -445,13 +387,6 @@
 
             document.getElementById("schoolCodeBadge")?.classList.toggle("hidden", !eligibleForFederalAid);
             document.getElementById("costOnlySummaryCard")?.classList.toggle("hidden", eligibleForFederalAid);
-
-            const scenarioHelper = document.getElementById("scenarioHelper");
-            if (scenarioHelper) {
-                scenarioHelper.innerText = eligibleForFederalAid
-                    ? "All three cost ranges display below; this selection controls the federal loan allocation estimate."
-                    : "All three cost ranges display below; this selection controls the annual cost summary.";
-            }
 
             const costRangeContext = document.getElementById("costRangeContext");
             if (costRangeContext) {
@@ -473,21 +408,10 @@
             }
 
             const level = document.getElementById("academicLevel").value;
-            const yearGroup = document.getElementById("yearGroup");
             const dependencySelect = document.getElementById("dependencyStatus");
-            const graduateLoanCategoryGroup = document.getElementById("graduateLoanCategoryGroup");
 
             if (level === "graduate") {
-                yearGroup.classList.add("hidden");
                 dependencySelect.value = "independent";
-                dependencySelect.disabled = true;
-                dependencySelect.classList.add("bg-gray-200", "cursor-not-allowed");
-                graduateLoanCategoryGroup.classList.remove("hidden");
-            } else {
-                yearGroup.classList.remove("hidden");
-                dependencySelect.disabled = false;
-                dependencySelect.classList.remove("bg-gray-200", "cursor-not-allowed");
-                graduateLoanCategoryGroup.classList.add("hidden");
             }
 
             updateLoanInputVisibility();
@@ -496,28 +420,25 @@
 
         function updateLoanInputVisibility() {
             const eligibleForFederalAid = isFederalAidEligibleStatus();
-            const level = document.getElementById("academicLevel")?.value;
-            const dependency = document.getElementById("dependencyStatus")?.value;
-            const graduateLoanCategory = document.getElementById("graduateLoanCategory")?.value;
-            const parentPlusRule = document.getElementById("parentPlusRule")?.value;
+            const isGraduate = document.getElementById("academicLevel")?.value === "graduate";
+            const dependencyGroup = document.getElementById("dependencyGroup");
+            const dependencySelect = document.getElementById("dependencyStatus");
 
-            const isGraduate = level === "graduate";
-            const isDependentUndergrad = level === "undergraduate" && dependency === "dependent";
+            dependencyGroup?.classList.toggle("hidden", !eligibleForFederalAid || isGraduate);
 
-            document.getElementById("dependencyGroup")?.classList.toggle("hidden", !eligibleForFederalAid);
-            document.getElementById("priorFederalBorrowingGroup")?.classList.toggle("hidden", !eligibleForFederalAid);
-            document.getElementById("graduateLoanCategoryGroup")?.classList.toggle("hidden", !(eligibleForFederalAid && isGraduate));
-            document.getElementById("parentPlusRuleGroup")?.classList.toggle("hidden", !(eligibleForFederalAid && isDependentUndergrad));
-            document.getElementById("priorGradProfBorrowingGroup")?.classList.toggle("hidden", !(eligibleForFederalAid && isGraduate && graduateLoanCategory !== "legacyGradPlus"));
-            document.getElementById("priorParentPlusBorrowingGroup")?.classList.toggle("hidden", !(eligibleForFederalAid && isDependentUndergrad && parentPlusRule === "newParentPlus"));
+            if (dependencySelect) {
+                dependencySelect.disabled = isGraduate;
+                dependencySelect.classList.toggle("bg-gray-200", isGraduate);
+                dependencySelect.classList.toggle("cursor-not-allowed", isGraduate);
+                if (isGraduate) dependencySelect.value = "independent";
+            }
         }
 
         function calculateFinancials() {
             const level = document.getElementById("academicLevel").value;
             const tuitionEUR = parseNonNegativeNumber(document.getElementById("annualTuitionEUR")?.value);
             const dependency = document.getElementById("dependencyStatus").value;
-            const year = parseInt(document.getElementById("undergradYear").value, 10);
-            const selectedScenario = document.getElementById("costScenario").value;
+            const selectedScenario = PLANNING_SCENARIO;
             const eligibleForFederalAid = isFederalAidEligibleStatus();
 
             const tuitionFeeWarning = document.getElementById("tuitionFeeWarning");
@@ -528,7 +449,6 @@
 
             const fxRate = UCD_FINANCIAL_DATABASE.metadata.institutionalExchangeRate;
             const funding = getFundingInputs(fxRate);
-            const loanInputs = getLoanInputs();
 
             document.getElementById("academicYearLabel").innerText = UCD_FINANCIAL_DATABASE.metadata.academicYear;
             document.getElementById("fxRateLabel").innerText = `Planning FX rate: €1 = $${fxRate.toFixed(2)}`;
@@ -544,15 +464,15 @@
                 scenarioTotals[scenario] = calculateScenarioTotals(level, tuitionEUR, scenario, funding, fxRate);
             });
 
-            updateScenarioCards(scenarioTotals, selectedScenario, fxRate, funding);
+            updateScenarioCards(scenarioTotals, funding);
             updateBreakdownTable(scenarioTotals, level, funding, fxRate, eligibleForFederalAid);
             updateMonthlyCostTable();
             updateOneTimeCostTable();
 
             if (eligibleForFederalAid) {
-                updateLoanDisplay(scenarioTotals[selectedScenario], selectedScenario, level, dependency, year, fxRate, funding, loanInputs);
+                updateLoanDisplay(scenarioTotals[selectedScenario], level, dependency, funding);
             } else {
-                updateCostOnlyDisplay(scenarioTotals[selectedScenario], selectedScenario, funding);
+                updateCostOnlyDisplay(scenarioTotals[selectedScenario], funding);
             }
         }
 
@@ -601,16 +521,6 @@
             };
         }
 
-        function getLoanInputs() {
-            return {
-                graduateLoanCategory: document.getElementById("graduateLoanCategory")?.value || "standardGraduate",
-                parentPlusRule: document.getElementById("parentPlusRule")?.value || "newParentPlus",
-                priorStudentLoansUSD: parseNonNegativeNumber(document.getElementById("priorStudentLoansUSD")?.value),
-                priorGradProfLoansUSD: parseNonNegativeNumber(document.getElementById("priorGradProfLoansUSD")?.value),
-                priorParentPlusUSD: parseNonNegativeNumber(document.getElementById("priorParentPlusUSD")?.value)
-            };
-        }
-
         function getMonthlyLivingTotal(scenario) {
             const statedTotal = UCD_FINANCIAL_DATABASE.costOfLivingEUR.monthlyTotals?.[scenario];
             if (typeof statedTotal === "number") return statedTotal;
@@ -625,7 +535,7 @@
             return UCD_FINANCIAL_DATABASE.costOfLivingEUR.oneTimeItems.reduce((sum, item) => sum + item.cost, 0);
         }
 
-        function updateScenarioCards(scenarioTotals, selectedScenario, fxRate, funding) {
+        function updateScenarioCards(scenarioTotals, funding) {
             SCENARIOS.forEach(scenario => {
                 const totals = scenarioTotals[scenario];
                 const titleCaseScenario = scenario[0].toUpperCase() + scenario.slice(1);
@@ -636,15 +546,6 @@
                 document.getElementById(`living${titleCaseScenario}Note`).innerText = fundingApplied
                     ? `Net after ${formatCurrencyUSD(funding.totalFundingUSD)} scholarships/funding; gross ${formatCurrencyEUR(totals.grossTotalEUR)}.`
                     : `${formatCurrencyEUR(totals.monthlyLivingEUR)}/month × ${totals.colMonths} months + ${formatCurrencyEUR(totals.oneTimeEUR)} one-time`;
-
-                const card = document.getElementById(`scenarioCard-${scenario}`);
-                const isSelected = scenario === selectedScenario;
-                card.classList.toggle("border-2", isSelected);
-                card.classList.toggle("border-ucdSecondary", isSelected);
-                card.classList.toggle("bg-blue-50/40", isSelected);
-                card.classList.toggle("border", !isSelected);
-                card.classList.toggle("border-gray-200", !isSelected);
-                card.classList.toggle("bg-gray-50", !isSelected);
             });
         }
 
@@ -744,14 +645,14 @@
             `).join("") + totalRow;
         }
 
-        function updateCostOnlyDisplay(selectedTotals, selectedScenario, funding) {
+        function updateCostOnlyDisplay(selectedTotals, funding) {
             const status = getCitizenshipStatus();
             const statusNote = status === "other"
                 ? "Based on the selected citizenship/residency status, the planner is showing cost and scholarship estimates only."
                 : "Select a citizenship/residency status above to tailor the results.";
 
             document.getElementById("costOnlyNetUSD").innerText = formatCurrencyUSD(selectedTotals.netTotalUSD);
-            document.getElementById("costOnlyScenarioLabel").innerText = `Based on the ${SCENARIO_LABELS[selectedScenario]} cost scenario, after scholarships/funding.`;
+            document.getElementById("costOnlyScenarioLabel").innerText = "Based on median estimated costs, after scholarships/funding. Lowest and high cost ranges remain displayed above.";
             document.getElementById("costOnlyStatusNote").innerText = statusNote;
             document.getElementById("costOnlyGrossUSD").innerText = formatCurrencyUSD(selectedTotals.grossTotalUSD);
             document.getElementById("costOnlyFundingUSD").innerText = formatCreditUSD(funding.totalFundingUSD);
@@ -759,13 +660,13 @@
             document.getElementById("costOnlyNetEUR").innerText = formatCurrencyEUR(selectedTotals.netTotalEUR);
         }
 
-        function updateLoanDisplay(selectedTotals, selectedScenario, level, dependency, year, fxRate, funding, loanInputs) {
-            const loanPackage = calculateFederalLoanEligibility(selectedTotals.netTotalUSD, level, dependency, year, loanInputs);
+        function updateLoanDisplay(selectedTotals, level, dependency, funding) {
+            const loanPackage = calculateFederalLoanEligibility(selectedTotals.netTotalUSD, level, dependency);
 
             document.getElementById("plusTitle").innerText = loanPackage.plusTitle;
             document.getElementById("plusDescription").innerText = loanPackage.plusDescription;
             document.getElementById("loanRuleSummary").innerText = loanPackage.ruleSummary;
-            document.getElementById("aidScenarioLabel").innerText = `Based on the ${SCENARIO_LABELS[selectedScenario]} cost scenario, after scholarships/funding.`;
+            document.getElementById("aidScenarioLabel").innerText = "Based on median estimated costs after scholarships and other funding. Lowest and high cost ranges remain displayed above.";
             document.getElementById("selectedGrossCoaUSD").innerText = formatCurrencyUSD(selectedTotals.grossTotalUSD);
             document.getElementById("selectedFundingUSD").innerText = formatCreditUSD(funding.totalFundingUSD);
             document.getElementById("selectedCoaUSD").innerText = formatCurrencyUSD(selectedTotals.netTotalUSD);
@@ -779,66 +680,38 @@
             document.getElementById("loanGapCard").classList.toggle("hidden", loanPackage.gap <= 0);
         }
 
-        function calculateFederalLoanEligibility(netCOAUSD, level, dependency, year, loanInputs) {
+        function calculateFederalLoanEligibility(netCOAUSD, level, dependency) {
             const rules = UCD_FINANCIAL_DATABASE.federalLoanRules;
             let allowedSubsidized = 0;
             let allowedUnsubsidized = 0;
             let allowedPlus = 0;
             let plusTitle = "Direct PLUS Loan";
-            let plusDescription = "OBBBA limits may cap PLUS eligibility below the remaining net COA.";
-            let ruleSummary = `OBBBA loan limits effective ${rules.effectiveDate}.`;
-
-            const studentLifetimeRemaining = Math.max(0, rules.lifetimeStudentLoanLimitUSD - loanInputs.priorStudentLoansUSD);
+            let plusDescription = "No PLUS amount is included for this applicant type.";
+            let ruleSummary = `Annual federal loan limits for first-year, first-time borrowers effective ${rules.effectiveDate}.`;
 
             if (level === "graduate") {
-                const category = loanInputs.graduateLoanCategory;
-
-                if (category === "legacyGradPlus") {
-                    const legacyUnsubLimit = rules.graduate.standardGraduate.annualUnsubsidizedLimitUSD;
-                    allowedUnsubsidized = Math.min(legacyUnsubLimit, netCOAUSD);
-                    allowedPlus = Math.max(0, netCOAUSD - allowedUnsubsidized);
-                    plusTitle = "Legacy Direct Graduate PLUS Loan";
-                    plusDescription = "Legacy transition estimate: Grad PLUS may cover remaining net COA if the borrower qualifies under the same-program transition rules.";
-                    ruleSummary = "Legacy Grad PLUS selected. Estimate uses prior-rule Grad PLUS up to remaining net COA; UCD must confirm eligibility.";
-                } else {
-                    const programRules = category === "professional" ? rules.graduate.professional : rules.graduate.standardGraduate;
-                    const gradProfAggregateRemaining = Math.max(0, programRules.aggregateLimitUSD - loanInputs.priorGradProfLoansUSD);
-                    const annualUnsubCap = Math.min(programRules.annualUnsubsidizedLimitUSD, gradProfAggregateRemaining, studentLifetimeRemaining);
-                    allowedUnsubsidized = Math.min(annualUnsubCap, netCOAUSD);
-                    allowedPlus = 0;
-                    plusTitle = "Graduate PLUS Loan";
-                    plusDescription = "Graduate PLUS is eliminated for new borrowers beginning July 1, 2026; no Grad PLUS amount is included.";
-                    ruleSummary = `${programRules.label}: Direct Unsubsidized capped at ${formatCurrencyUSD(programRules.annualUnsubsidizedLimitUSD)}/year, ${formatCurrencyUSD(programRules.aggregateLimitUSD)} aggregate, and ${formatCurrencyUSD(rules.lifetimeStudentLoanLimitUSD)} lifetime student-loan cap.`;
-                }
+                const annualUnsubsidizedLimit = rules.graduate.standardGraduate.annualUnsubsidizedLimitUSD;
+                allowedUnsubsidized = Math.min(annualUnsubsidizedLimit, netCOAUSD);
+                plusTitle = "Graduate PLUS Loan Not Included";
+                plusDescription = "Graduate PLUS is not included for first-time borrowers under the rules effective July 1, 2026.";
+                ruleSummary = `Graduate applicant: potential Direct Unsubsidized Loan eligibility up to ${formatCurrencyUSD(annualUnsubsidizedLimit)} for the academic year, limited by the official Cost of Attendance and other eligibility requirements.`;
             } else {
-                const yearKey = year >= 3 ? 3 : year;
-                const annual = rules.undergraduate[dependency].annualByYear[yearKey];
-                allowedSubsidized = Math.min(annual.subsidized, netCOAUSD, studentLifetimeRemaining);
-                const remainingAfterSub = Math.max(0, netCOAUSD - allowedSubsidized);
-                const studentLifetimeRemainingAfterSub = Math.max(0, studentLifetimeRemaining - allowedSubsidized);
-                allowedUnsubsidized = Math.min(annual.unsubsidized, remainingAfterSub, studentLifetimeRemainingAfterSub);
-
+                const annual = rules.undergraduate[dependency].annualByYear[1];
+                allowedSubsidized = Math.min(annual.subsidized, netCOAUSD);
+                const remainingAfterSubsidized = Math.max(0, netCOAUSD - allowedSubsidized);
+                allowedUnsubsidized = Math.min(annual.unsubsidized, remainingAfterSubsidized);
                 const remainingAfterStudentLoans = Math.max(0, netCOAUSD - allowedSubsidized - allowedUnsubsidized);
 
                 if (dependency === "dependent") {
-                    if (loanInputs.parentPlusRule === "legacyParentPlus") {
-                        allowedPlus = remainingAfterStudentLoans;
-                        plusTitle = "Legacy Direct Parent PLUS Loan";
-                        plusDescription = "Legacy transition estimate: Parent PLUS may cover remaining net COA if the borrower/student qualifies under transition rules.";
-                        ruleSummary = "Dependent undergraduate, legacy Parent PLUS selected. Estimate uses prior-rule Parent PLUS up to remaining net COA; UCD must confirm eligibility.";
-                    } else {
-                        const parentPlusRules = rules.undergraduate.parentPlus;
-                        const parentPlusAggregateRemaining = Math.max(0, parentPlusRules.aggregateLimitPerStudentUSD - loanInputs.priorParentPlusUSD);
-                        allowedPlus = Math.min(remainingAfterStudentLoans, parentPlusRules.annualLimitUSD, parentPlusAggregateRemaining);
-                        plusTitle = "Direct Parent PLUS Loan";
-                        plusDescription = `New Parent PLUS cap: ${formatCurrencyUSD(parentPlusRules.annualLimitUSD)}/year and ${formatCurrencyUSD(parentPlusRules.aggregateLimitPerStudentUSD)} aggregate per dependent student.`;
-                        ruleSummary = `Dependent undergraduate: Direct Student Loan limits remain based on year/dependency. New Parent PLUS cap is ${formatCurrencyUSD(parentPlusRules.annualLimitUSD)}/year and ${formatCurrencyUSD(parentPlusRules.aggregateLimitPerStudentUSD)} aggregate.`;
-                    }
+                    const parentPlusAnnualLimit = rules.undergraduate.parentPlus.annualLimitUSD;
+                    allowedPlus = Math.min(remainingAfterStudentLoans, parentPlusAnnualLimit);
+                    plusTitle = "Potential Direct Parent PLUS Loan";
+                    plusDescription = `Potential Parent PLUS eligibility is limited to the lesser of the remaining official Cost of Attendance or ${formatCurrencyUSD(parentPlusAnnualLimit)} for the academic year. Credit and other eligibility requirements still apply.`;
+                    ruleSummary = `Dependent undergraduate, first year: potential Direct Subsidized Loan up to ${formatCurrencyUSD(annual.subsidized)}, Direct Unsubsidized Loan up to ${formatCurrencyUSD(annual.unsubsidized)}, and Parent PLUS up to the applicable annual limit, all subject to official eligibility review.`;
                 } else {
-                    allowedPlus = 0;
                     plusTitle = "Parent PLUS Loan Not Available";
-                    plusDescription = "Independent undergraduate students are not eligible for Parent PLUS borrowing. Only student Direct Loan limits are included.";
-                    ruleSummary = "Independent undergraduate: estimate includes only Direct Subsidized and Unsubsidized student loans; no Parent PLUS eligibility is included.";
+                    plusDescription = "Independent undergraduate students are not eligible for Parent PLUS borrowing. This estimate includes only potential student Direct Loans.";
+                    ruleSummary = `Independent undergraduate, first year: potential Direct Subsidized Loan up to ${formatCurrencyUSD(annual.subsidized)} and Direct Unsubsidized Loan up to ${formatCurrencyUSD(annual.unsubsidized)}, subject to official eligibility review.`;
                 }
             }
 
