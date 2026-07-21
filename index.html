@@ -102,9 +102,7 @@
                         <label for="citizenshipStatus" class="block text-sm font-medium text-gray-700 mb-1">Citizenship / Residency Status</label>
                         <select id="citizenshipStatus" class="w-full rounded-md border-gray-300 shadow-sm p-2.5 bg-gray-50 border focus:ring-2 focus:ring-ucdSecondary focus:bg-white outline-none" onchange="handleCitizenshipChange()">
                             <option value="">Select status...</option>
-                            <option value="usCitizen">US Citizen</option>
-                            <option value="usNational">US National</option>
-                            <option value="usPermanentResident">US Permanent Resident</option>
+                            <option value="usEligible">US Citizen / National / Resident</option>
                             <option value="other">Other</option>
                         </select>
                         <p class="text-xs text-gray-400 mt-1">This helps tailor which funding sections are shown.</p>
@@ -161,7 +159,14 @@
                             <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Estimated Total Annual Expenses</h3>
                             <p class="text-xs text-gray-400 mt-1" id="costRangeContext">Includes tuition, monthly living costs, one-time costs, and scholarship/funding offsets.</p>
                         </div>
-                        <p class="text-xs text-gray-500" id="fxRateLabel"></p>
+                    </div>
+
+                    <div class="planning-rate-notice" role="note" aria-labelledby="planningRateTitle">
+                        <div>
+                            <h4 id="planningRateTitle">Planning Exchange Rate</h4>
+                            <p class="planning-rate-value" id="fxRateLabel"></p>
+                        </div>
+                        <p class="planning-rate-disclaimer">This exchange rate is indicative only and can fluctuate over time. Students should confirm the current exchange rate when planning costs or making financial decisions.</p>
                     </div>
 
                     <div id="tuitionFeeWarning" class="mb-5 rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900" role="status" aria-live="polite">
@@ -369,7 +374,7 @@
         }
 
         function isFederalAidEligibleStatus(status = getCitizenshipStatus()) {
-            return ["usCitizen", "usNational", "usPermanentResident"].includes(status);
+            return status === "usEligible";
         }
 
         function handleCitizenshipChange() {
@@ -451,7 +456,7 @@
             const funding = getFundingInputs(fxRate);
 
             document.getElementById("academicYearLabel").innerText = UCD_FINANCIAL_DATABASE.metadata.academicYear;
-            document.getElementById("fxRateLabel").innerText = `Planning FX rate: €1 = $${fxRate.toFixed(2)}`;
+            document.getElementById("fxRateLabel").innerText = `€1.00 EUR = $${fxRate.toFixed(2)} USD`;
             document.getElementById("livingSourceNote").innerText = eligibleForFederalAid
                 ? `Living costs shown as Lowest / Median / High; monthly living-cost totals last updated ${UCD_FINANCIAL_DATABASE.metadata.livingCostsLastUpdated}. Federal loan limits reflect OBBBA planning rules last updated ${UCD_FINANCIAL_DATABASE.metadata.federalLoanRulesLastUpdated}.`
                 : `Living costs shown as Lowest / Median / High; monthly living-cost totals last updated ${UCD_FINANCIAL_DATABASE.metadata.livingCostsLastUpdated}.`;

@@ -256,6 +256,45 @@ input:disabled, select:disabled {
   opacity: 1;
 }
 
+/* Prominent exchange-rate planning notice */
+.planning-rate-notice {
+  display: grid;
+  grid-template-columns: minmax(12rem, 0.8fr) minmax(16rem, 1.7fr);
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1.25rem;
+  padding: 1rem 1.125rem;
+  border: 2px solid var(--ucd-secondary);
+  border-left-width: 0.5rem;
+  border-radius: 0.75rem;
+  background: var(--blue-50);
+  color: var(--ucd-primary);
+}
+
+.planning-rate-notice h4 {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.planning-rate-value {
+  margin: 0.25rem 0 0;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 800;
+  color: var(--ucd-secondary);
+}
+
+.planning-rate-disclaimer {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+  color: var(--slate-700);
+}
+
 
 /* UCD header branding */
 .ucd-header-brand {
@@ -301,6 +340,10 @@ input:disabled, select:disabled {
 }
 
 @media (max-width: 767px) {
+  .planning-rate-notice {
+    grid-template-columns: 1fr;
+  }
+
   .ucd-header-logo {
     padding: 0.375rem 0.5rem;
   }
